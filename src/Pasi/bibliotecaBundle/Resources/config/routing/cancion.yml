@@ -1,0 +1,30 @@
+cancion:
+    pattern:  /
+    defaults: { _controller: "BibliotecaBundle:Cancion:index" }
+
+cancion_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BibliotecaBundle:Cancion:show" }
+
+cancion_new:
+    pattern:  /new
+    defaults: { _controller: "BibliotecaBundle:Cancion:new" }
+
+cancion_create:
+    pattern:  /create
+    defaults: { _controller: "BibliotecaBundle:Cancion:create" }
+    requirements: { _method: post }
+
+cancion_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BibliotecaBundle:Cancion:edit" }
+
+cancion_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BibliotecaBundle:Cancion:update" }
+    requirements: { _method: post }
+
+cancion_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BibliotecaBundle:Cancion:delete" }
+    requirements: { _method: post }

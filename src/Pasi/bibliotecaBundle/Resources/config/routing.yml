@@ -1,3 +1,21 @@
-biblioteca_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BibliotecaBundle:Default:index }
+Artista:
+    resource: "@BibliotecaBundle/Resources/config/routing/artista.yml"
+    prefix:   /artista
+
+Album:
+    resource: "@BibliotecaBundle/Resources/config/routing/album.yml"
+    prefix:   /album
+
+Cancion:
+    resource: "@BibliotecaBundle/Resources/config/routing/cancion.yml"
+    prefix:   /cancion
+
+Categoria:
+    resource: "@BibliotecaBundle/Resources/config/routing/categoria.yml"
+    prefix:   /categoria
+
+
+
+
+
+

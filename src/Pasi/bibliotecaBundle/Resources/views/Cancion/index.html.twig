@@ -1,0 +1,51 @@
+<h1>Cancion list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Orden</th>
+            <th>Descripcion</th>
+            <th>Letra</th>
+            <th>Duracion</th>
+            <th>Cancion</th>
+            <th>Creacion</th>
+            <th>Modificacion</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('cancion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.titulo }}</td>
+            <td>{{ entity.orden }}</td>
+            <td>{{ entity.descripcion }}</td>
+            <td>{{ entity.letra }}</td>
+            <td>{{ entity.duracion }}</td>
+            <td>{{ entity.cancion }}</td>
+            <td>{% if entity.creacion %}{{ entity.creacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.modificacion %}{{ entity.modificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('cancion_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cancion_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('cancion_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,30 @@
+album:
+    pattern:  /
+    defaults: { _controller: "BibliotecaBundle:Album:index" }
+
+album_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BibliotecaBundle:Album:show" }
+
+album_new:
+    pattern:  /new
+    defaults: { _controller: "BibliotecaBundle:Album:new" }
+
+album_create:
+    pattern:  /create
+    defaults: { _controller: "BibliotecaBundle:Album:create" }
+    requirements: { _method: post }
+
+album_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BibliotecaBundle:Album:edit" }
+
+album_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BibliotecaBundle:Album:update" }
+    requirements: { _method: post }
+
+album_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BibliotecaBundle:Album:delete" }
+    requirements: { _method: post }

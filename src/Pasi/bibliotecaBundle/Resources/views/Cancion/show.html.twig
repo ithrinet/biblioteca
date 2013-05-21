@@ -1,0 +1,61 @@
+<h1>Cancion</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Titulo</th>
+            <td>{{ entity.titulo }}</td>
+        </tr>
+        <tr>
+            <th>Orden</th>
+            <td>{{ entity.orden }}</td>
+        </tr>
+        <tr>
+            <th>Descripcion</th>
+            <td>{{ entity.descripcion }}</td>
+        </tr>
+        <tr>
+            <th>Letra</th>
+            <td>{{ entity.letra }}</td>
+        </tr>
+        <tr>
+            <th>Duracion</th>
+            <td>{{ entity.duracion }}</td>
+        </tr>
+        <tr>
+            <th>Cancion</th>
+            <td>{{ entity.cancion }}</td>
+        </tr>
+        <tr>
+            <th>Creacion</th>
+            <td>{{ entity.creacion|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Modificacion</th>
+            <td>{{ entity.modificacion|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('cancion') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('cancion_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('cancion_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

@@ -1,0 +1,30 @@
+artista:
+    pattern:  /
+    defaults: { _controller: "BibliotecaBundle:Artista:index" }
+
+artista_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BibliotecaBundle:Artista:show" }
+
+artista_new:
+    pattern:  /new
+    defaults: { _controller: "BibliotecaBundle:Artista:new" }
+
+artista_create:
+    pattern:  /create
+    defaults: { _controller: "BibliotecaBundle:Artista:create" }
+    requirements: { _method: post }
+
+artista_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BibliotecaBundle:Artista:edit" }
+
+artista_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BibliotecaBundle:Artista:update" }
+    requirements: { _method: post }
+
+artista_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BibliotecaBundle:Artista:delete" }
+    requirements: { _method: post }

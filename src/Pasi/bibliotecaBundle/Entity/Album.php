@@ -3,9 +3,12 @@
 namespace Pasi\bibliotecaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 
 class Album{
@@ -56,13 +59,70 @@ class Album{
 	 */
 	private $categoria;
 	
+	private $file;
+	
+	public function getFile(){
+		return $this->file;
+	}
+	public function setFile(UploadedFile $file){
+		return $this->file = $file;
+	}
+	
 	public function __toString(){
 		return $this->titulo." (".$this->publicacion.")";
 	}
+	
+	public function getUploadRootDir(){
+		return __DIR__.'/../../../../web/'.$this->getUploadDir();
+	}
+	
+	public function getUploadDir(){
+		return 'upload/albums';
+	}
+	
+	public function getWebPath(){
+		if ($this->foto ==null) {
+			return null;
+		}
+		return $this->getUploadDir().$this->foto;
+	}
+	public function getAbsolutePath(){
+		if ($this->foto ==null) {
+			return null;
+		}
+		return $this->getUploadDir().'/'.$this->foto;
+	}
+	/**
+	 * @ORM\PostPersist()
+	 * @ORM\PostUpdate()
+	 */
+	public function upload(){
+		
+	if($this->file != null){
+			if($this->foto != null){
+				$this->remove();
+			}
+			$this->foto = $this->file->getClientOriginalName();
+			
+			$this->file->move($this->getUploadRootDir(),$this->foto);
+			
+			$this->file=null;
+		}
+	}
+	
+	/**
+	 * @ORM\PostRemove()
+	 */
+	public function remove(){
+		if($this->foto != null){
+			unlink($this->getAbsolutePath());
+		}
+	
+	}
+	
 	public function __construct(){
 		$this->creacion = new \DateTime();
 		$this->modificacion = new \DateTime();
-
 		$this->canciones = new ArrayCollection();
 	}
 
