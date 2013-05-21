@@ -16,7 +16,7 @@ class CancionType extends AbstractType
             ->add('descripcion')
             ->add('letra')
             ->add('duracion')
-            ->add('cancion')
+            ->add('cancion','file')
             ->add('album')
         ;
     }

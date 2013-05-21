@@ -79,6 +79,7 @@ class Cancion
     /**
      * @ORM\ManyToOne(targetEntity="Album", inversedBy="canciones")
      */
+    
     private $album;
     
     public function __toString(){

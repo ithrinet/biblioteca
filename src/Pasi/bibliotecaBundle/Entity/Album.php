@@ -59,6 +59,12 @@ class Album{
 	 */
 	private $categoria;
 	
+
+	public function __toString(){
+		return $this->titulo." (".$this->publicacion.")";
+	}
+	
+	
 	private $file;
 	
 	public function getFile(){
@@ -66,10 +72,6 @@ class Album{
 	}
 	public function setFile(UploadedFile $file){
 		return $this->file = $file;
-	}
-	
-	public function __toString(){
-		return $this->titulo." (".$this->publicacion.")";
 	}
 	
 	public function getUploadRootDir(){
@@ -93,19 +95,25 @@ class Album{
 		return $this->getUploadDir().'/'.$this->foto;
 	}
 	/**
+	 * @ORM\PrePersist()
+	 * @ORM\PreUpdate
+	 */
+	public function preUpload(){
+		if($this->file != null){
+			$this->foto = $this->file->getClientOriginalName();
+		}
+	}
+	/**
 	 * @ORM\PostPersist()
 	 * @ORM\PostUpdate()
 	 */
 	public function upload(){
-		
-	if($this->file != null){
-			if($this->foto != null){
-				$this->remove();
-			}
-			$this->foto = $this->file->getClientOriginalName();
-			
+		if($this->file != null){
+				
+				
+				
 			$this->file->move($this->getUploadRootDir(),$this->foto);
-			
+				
 			$this->file=null;
 		}
 	}
