@@ -1,0 +1,7 @@
+parameters:
+#    biblioteca.example.class: Pasi\bibliotecaBundle\Example
+
+services:
+#    biblioteca.example:
+#        class: %biblioteca.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
