@@ -3,12 +3,13 @@
 namespace Pasi\bibliotecaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Cancion
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Cancion
 {
@@ -81,14 +82,90 @@ class Cancion
      */
     
     private $album;
+    /**
+     * 
+     * @var unknown
+     */
+    private $file;
+    /**
+     * 
+     * @return \Pasi\bibliotecaBundle\Entity\unknown
+     */
+    public function getFile(){
+    	return $this->file;
+    }
+    /**
+     * 
+     * @param UploadedFile $file
+     * @return UploadedFile
+     */
+    public function setFile(UploadedFile $file){
+    	return $this->file = $file;
+    }
     
+    public function getAbsolutePath(){
+    	if ($this->cancion == null) {
+    		return null;
+    	}
+    	return $this->getUploadDir().'/'.$this->cancion;
+    }
+    public function getWebPath()
+    {
+    	if ($this->cancion ==null) {
+    		return null;
+    	}
+    	return $this->getUploadDir().$this->cancion;
+    }
+    public function getUploadRootDir()
+    {
+    	return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+    
+    public function getUploadDir()
+    {
+    	return 'upload/canciones';
+    }
+    
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate
+     */
+    public function preUpload(){
+    	if($this->file != null){
+    		$this->cancion = $this->file->getClientOriginalName();
+    	}
+    }
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload(){
+    	if($this->file != null){
+    			
+    		$this->file->move($this->getUploadRootDir(),$this->cancion);
+    
+    		$this->file=null;
+    	}
+    }
+    
+    /**
+     * @ORM\PostRemove()
+     */
+    public function remove(){
+    	if($this->cancion != null){
+    		unlink($this->getAbsolutePath());
+    	}
+    
+    }
     public function __toString(){
     	return $this->titulo;
     }
-    
+    /**
+     * this Construct
+     */
     public function __construct(){
-    	$this->fechaCreacion = new \DateTime();
-    	$this->fechaModificacion = new \DateTime();
+    	$this->creacion = new \DateTime();
+    	$this->modificacion = new \DateTime();
     }
 
 

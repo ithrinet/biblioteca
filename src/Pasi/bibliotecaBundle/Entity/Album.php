@@ -89,7 +89,7 @@ class Album{
 		return $this->getUploadDir().$this->foto;
 	}
 	public function getAbsolutePath(){
-		if ($this->foto ==null) {
+		if ($this->foto == null) {
 			return null;
 		}
 		return $this->getUploadDir().'/'.$this->foto;
@@ -109,9 +109,7 @@ class Album{
 	 */
 	public function upload(){
 		if($this->file != null){
-				
-				
-				
+			
 			$this->file->move($this->getUploadRootDir(),$this->foto);
 				
 			$this->file=null;

@@ -77,6 +77,7 @@ class CancionController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setCreacion(new \DateTime());
             $em->persist($entity);
             $em->flush();
 
@@ -132,6 +133,7 @@ class CancionController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+        	
         	$entity->setModificacion(new \DateTime());
             $em->persist($entity);
             $em->flush();
